@@ -1,17 +1,8 @@
-FROM jetadmin/jet-bridge-base:1.3.2
+FROM jetadmin/jetbridge:latest
 
-COPY packages /packages
-RUN pip install -e /packages/jet_bridge_base
-RUN pip install -e /packages/jet_bridge
+EXPOSE 8888
 
-RUN mkdir /jet
-VOLUME /jet
-WORKDIR /jet
+ENV PORT=8888
+ENV HOST=0.0.0.0
 
-#USER jet
-
-COPY docker/entrypoint.sh /
-COPY docker/network-entrypoint.sh /
-RUN chmod +x /entrypoint.sh
-RUN chmod +x /network-entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["npm", "start"]
