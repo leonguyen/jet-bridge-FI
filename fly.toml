@@ -2,7 +2,7 @@ app = "jet-bridge-fi"
 primary_region = "sin"
 
 [build]
-  dockerfile = "Dockerfile"
+  image = "jetadmin/jetbridge:latest"
 
 [env]
   PORT = "8888"
@@ -12,11 +12,21 @@ primary_region = "sin"
 [http_service]
   internal_port = 8888
   force_https = true
-  auto_stop_machines = "stop"
+  auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
 
+[[services]]
+  protocol = "tcp"
+  internal_port = 8888
+
+  [[services.ports]]
+    port = 80
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
 [[vm]]
-  cpu_kind = "shared"
-  cpus = 1
-  memory_mb = 256
+  size = "shared-cpu-1x"
+  memory = "256mb"
