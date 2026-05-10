@@ -1,4 +1,4 @@
-app = "jet-bridge-app"
+app = "jet-bridge-fi"
 primary_region = "sin"
 
 [build]
@@ -15,16 +15,8 @@ primary_region = "sin"
   auto_stop_machines = "stop"
   auto_start_machines = true
   min_machines_running = 0
-  processes = ["app"]
-
-  [[http_service.checks]]
-    interval = "15s"
-    timeout = "5s"
-    grace_period = "60s"
-    method = "GET"
-    path = "/"
 
 [[vm]]
-  memory = "512mb"
   cpu_kind = "shared"
   cpus = 1
+  memory_mb = 256
